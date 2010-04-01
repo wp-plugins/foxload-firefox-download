@@ -28,7 +28,7 @@ You can place firefox buttons as widget and if your theme does not support widge
 
 = Why should i offer my visitors a firefox button? =
 
-Because firefox is on of the best browsers in the world.
+Because firefox is one of the best browsers in the world.
 
 == Screenshots ==
 
