@@ -1,4 +1,4 @@
-=== GetFirefox ===
+=== Foxload Firefox Download ===
 Contributors: Foxload
 Donate link: http://www.foxload.com
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
