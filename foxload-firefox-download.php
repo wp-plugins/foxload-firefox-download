@@ -4,7 +4,7 @@ Plugin Name: Foxload Firefox Download
 Plugin URI: http://www.foxload.com/
 Description: Offers your blog visitors a <a href="http://www.foxload.com/firefox-download/">firefox download</a> button in different formats and colors on the sidebar. If your theme does not support widgets, call the php function <em>&lt;?php get_foxload_button(); ?&gt;</em>.
 Author: Foxload
-Version: 0.2
+Version: 0.2.1
 Author URI: http://www.foxload.com/
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
 */
@@ -128,6 +128,9 @@ function myFoxload_configuration($standalone = FALSE) {
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-green" '.($options['banner'] == '110-32-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-green.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-orange" '.($options['banner'] == '110-32-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-orange.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-purple" '.($options['banner'] == '110-32-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-purple.png" width="110" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-blue" '.($options['banner'] == '110-32-get-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-blue.png" width="110" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-orange" '.($options['banner'] == '110-32-get-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-orange.png" width="110" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-purple" '.($options['banner'] == '110-32-get-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-purple.png" width="110" /></td></tr>'.
 			'</table>'.
 		'</div>'.
 		'<div id="myFoxload-banner-120-240" style="'.($options['size'] == '120-240' ? '' : 'display:none;').'">'.
