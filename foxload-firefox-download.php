@@ -4,13 +4,14 @@ Plugin Name: Foxload Firefox Download
 Plugin URI: http://www.foxload.com/
 Description: Offers your blog visitors a <a href="http://www.foxload.com/firefox-download/">firefox download</a> button in different formats and colors on the sidebar. If your theme does not support widgets, call the php function <em>&lt;?php get_foxload_button(); ?&gt;</em>.
 Author: Foxload
-Version: 0.2.2
+Version: 0.2.3
 Author URI: http://www.foxload.com/
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
 */
 
 function get_foxload_button() {
   $options = get_option("widget_myFoxload");
+  
   if (!is_array( $options )) {
 	  $options = array(
 		'title' => '',
@@ -38,6 +39,7 @@ function widget_myFoxload($args) {
   extract($args);
 
   $options = get_option("widget_myFoxload");
+  
   if (!is_array( $options )) {
 	  $options = array(
 		'title' => '',
@@ -70,6 +72,7 @@ function myFoxload_settings() {
 
 function myFoxload_configuration($standalone = FALSE) {
   $options = get_option("widget_myFoxload");
+  
   if (!is_array( $options )) {
 	  $options = array(
 		'title' => '',
@@ -96,17 +99,17 @@ function myFoxload_configuration($standalone = FALSE) {
 	echo '<form action=""  method="post">';
   }
 
-  echo '<script type="text/javascript">'.
-		'function showFoxloadBanner(size) {'.
-			'document.getElementById("myFoxload-banner-110-32").style.display="none";'.
-			'document.getElementById("myFoxload-banner-120-240").style.display="none";'.
-			'document.getElementById("myFoxload-banner-125-125").style.display="none";'.
-			'document.getElementById("myFoxload-banner-173-26").style.display="none";'.
-			'document.getElementById("myFoxload-banner-468-60").style.display="none";'.
-			'document.getElementById("myFoxload-banner-80-15").style.display="none";'.
-			'document.getElementById("myFoxload-banner-"+size).style.display="";'.
-		'}'.
-	   '</script>'.
+  echo 	'<script type="text/javascript">'.
+			'function showFoxloadBanner(size) {'.
+				'document.getElementById("myFoxload-banner-110-32").style.display="none";'.
+				'document.getElementById("myFoxload-banner-120-240").style.display="none";'.
+				'document.getElementById("myFoxload-banner-125-125").style.display="none";'.
+				'document.getElementById("myFoxload-banner-173-26").style.display="none";'.
+				'document.getElementById("myFoxload-banner-468-60").style.display="none";'.
+				'document.getElementById("myFoxload-banner-80-15").style.display="none";'.
+				'document.getElementById("myFoxload-banner-"+size).style.display="";'.
+			'}'.
+		'</script>'.
 		'<p>'.
 		'<table border="0">'.
 		'<tr><td valign="middle"><label for="myFoxload-WidgetTitle">Title: </label></td>'.
