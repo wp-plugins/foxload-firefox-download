@@ -4,7 +4,7 @@ Plugin Name: Foxload Firefox Download
 Plugin URI: http://www.foxload.com/
 Description: Offers your blog visitors a <a href="http://www.foxload.com/firefox-download/">firefox download</a> button in different formats and colors on the sidebar. If your theme does not support widgets, call the php function <em>&lt;?php get_foxload_button(); ?&gt;</em>.
 Author: Foxload
-Version: 0.2.3
+Version: 0.2.4
 Author URI: http://www.foxload.com/
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
 */
@@ -21,6 +21,10 @@ function get_foxload_button() {
   }
   
   $locale = get_locale();
+  
+  if (strpos($_SERVER['SERVER_NAME'], '.co.uk') !== FALSE) {
+    $locale = 'en_gb';
+  }
   
   if (strtolower($locale) == 'de_de' || strtolower($locale) == 'de_ch' || strtolower($locale) == 'de_at')  {
 	$foxload_url = 'http://www.foxload.com/firefox-download/';
