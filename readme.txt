@@ -12,7 +12,7 @@ Offers your blog visitors a firefox download button in different formats and col
                                                      
 This plugin offers your blog visitors a [firefox download](http://www.foxload.com/firefox-download/ "firefox download") button in different formats and colors on the sidebar.
 
-Different banner formats and colors are included. The plugin use the wordpress locale settings for proper language versions of firefox.
+Different banner formats and colors are included. The plugin use the wordpress locale settings for proper language versions of firefox browser.
 
 You can place firefox buttons as widget and if your theme does not support widgets, you can place this `<?php if(function_exists('get_foxload_button'))get_foxload_button(); ?>` php code at the preferred position in your template. 
 
