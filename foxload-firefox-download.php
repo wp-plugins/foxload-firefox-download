@@ -4,7 +4,7 @@ Plugin Name: Foxload Firefox Download
 Plugin URI: http://www.foxload.com/
 Description: Offers your blog visitors a <a href="http://www.foxload.com/firefox-download/">firefox download</a> button in different formats and colors on the sidebar. If your theme does not support widgets, call the php function <em>&lt;?php get_foxload_button(); ?&gt;</em>.
 Author: Foxload
-Version: 0.2.7
+Version: 0.2.8
 Author URI: http://www.foxload.com/
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
 */
@@ -111,20 +111,32 @@ function myFoxload_configuration($standalone = FALSE) {
 
   echo 	'<script type="text/javascript">'.
 			'function showFoxloadBanner(size) {'.
-				'document.getElementById("myFoxload-banner-110-32").style.display="none";'.
-				'document.getElementById("myFoxload-banner-120-240").style.display="none";'.
-				'document.getElementById("myFoxload-banner-125-125").style.display="none";'.
-				'document.getElementById("myFoxload-banner-173-26").style.display="none";'.
-				'document.getElementById("myFoxload-banner-468-60").style.display="none";'.
-				'document.getElementById("myFoxload-banner-80-15").style.display="none";'.
-				'document.getElementById("myFoxload-banner-"+size).style.display="";'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-110-32"), (size == "110-32" ? true : false));'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-120-240"), (size == "120-240" ? true : false));'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-125-125"), (size == "125-125" ? true : false));'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-173-26"), (size == "173-26" ? true : false));'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-468-60"), (size == "468-60" ? true : false));'.
+				'showFoxloadBannerElements(getFoxloadBannerElementsByClass("myFoxload-banner-80-15"), (size == "80-15" ? true : false));'.
+			'}'.
+			'function getFoxloadBannerElementsByClass(className) {'.
+				'var divElements = document.getElementsByTagName("div");'.
+				'var classElements = new Array();'.				
+				'for (i=0; i<divElements.length; i++) {'.				
+					'if (divElements[i].className == className) { classElements.push(divElements[i]); }'.
+				'}'.
+				'return classElements;'.
+			'}'.
+			'function showFoxloadBannerElements(bannerElements, visible) {'.
+				'for (i=0; i<bannerElements.length; i++) {'.				
+					'if (visible) { bannerElements[i].style.display = ""; } else { bannerElements[i].style.display = "none"; }'.
+				'}'.
 			'}'.
 		'</script>'.
 		'<p>'.
 		'<table border="0">'.
 		'<tr><td valign="middle"><label for="myFoxload-WidgetTitle">Title: </label></td>'.
 		'<td valign="middle"><input type="text" id="myFoxload-WidgetTitle" name="myFoxload-WidgetTitle" value="'.$options['title'].'" /></td></tr>'.
-		'<tr><td valign="middle"><label for="myFoxload-WidgetTitle">Size: </label>'.
+		'<tr><td valign="middle"><label for="myFoxload-Size">Size: </label>'.
 		'<td valign="middle"><select id="myFoxload-Size" name="myFoxload-Size" onchange="showFoxloadBanner(this.value);">'.
 			'<option value="110-32" '.($options['size'] == '110-32' ? 'selected="selected"' : '').'>110x32</option>'.
 			'<option value="120-240" '.($options['size'] == '120-240' ? 'selected="selected"' : '').'>120x240</option>'.
@@ -135,45 +147,46 @@ function myFoxload_configuration($standalone = FALSE) {
 		'</select></td></tr>'.
 		'</table>'.
 		'<table border="0">'.
-		'<tr><td><label for="myFoxload-WidgetTitle">Banner: </label></td></tr>'.
-		'<tr><td style="padding-left: 10px;">'.
-		'<div id="myFoxload-banner-110-32" style="'.($options['size'] == '110-32' ? '' : 'display:none;').'">'.
+		'<tr><td><label for="myFoxload-Banner">Banner: </label></td></tr>'.
+		'</table>'.
+		'<div style="padding-left: 10px;">'.
+		'<div class="myFoxload-banner-110-32">'.
 			'<table border="0">'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-blue" '.($options['banner'] == '110-32-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-blue.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-green" '.($options['banner'] == '110-32-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-green.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-orange" '.($options['banner'] == '110-32-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-orange.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-purple" '.($options['banner'] == '110-32-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-purple.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-blue" '.($options['banner'] == '110-32-get-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-blue.png" width="110" /></td></tr>'.
-				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-orange" '.($options['banner'] == '110-32-get-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-orange.png" width="110" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-getmyFoxloadParent-orange" '.($options['banner'] == '110-32-get-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-orange.png" width="110" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="110-32-get-purple" '.($options['banner'] == '110-32-get-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-110-32-get-purple.png" width="110" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'<div id="myFoxload-banner-120-240" style="'.($options['size'] == '120-240' ? '' : 'display:none;').'">'.
+		'<div class="myFoxload-banner-120-240">'.
 			'<table border="0">'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="120-240-green" '.($options['banner'] == '120-240-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-120-240-green.png" height="80" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="120-240-orange" '.($options['banner'] == '120-240-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-120-240-orange.png" height="80" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'<div id="myFoxload-banner-125-125" style="'.($options['size'] == '125-125' ? '' : 'display:none;').'">'.
+		'<div class="myFoxload-banner-125-125">'.
 			'<table border="0">'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="125-125" '.($options['banner'] == '125-125' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-125-125.png" width="80" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'<div id="myFoxload-banner-173-26" style="'.($options['size'] == '173-26' ? '' : 'display:none;').'">'.
+		'<div class="myFoxload-banner-173-26">'.
 			'<table border="0">'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="173-26-green" '.($options['banner'] == '173-26-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-173-26-green.png" width="150" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="173-26-orange" '.($options['banner'] == '173-26-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-173-26-orange.png" width="150" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'<div id="myFoxload-banner-468-60" style="'.($options['size'] == '468-60' ? '' : 'display:none;').'">'.
+		'<div class="myFoxload-banner-468-60">'.
 			'<table border="0">'.
-				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-blue" '.($options['banner'] == '468-60-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-blue.png" width="250" /></td></tr>'.
-				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-green" '.($options['banner'] == '468-60-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-green.png" width="250" /></td></tr>'.
-				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-orange" '.($options['banner'] == '468-60-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-orange.png" width="250" /></td></tr>'.
-				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-purple" '.($options['banner'] == '468-60-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-purple.png" width="250" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-blue" '.($options['banner'] == '468-60-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-blue.png" width="180" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-green" '.($options['banner'] == '468-60-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-green.png" width="180" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-orange" '.($options['banner'] == '468-60-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-orange.png" width="180" /></td></tr>'.
+				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="468-60-purple" '.($options['banner'] == '468-60-purple' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-468-60-purple.png" width="180" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'<div id="myFoxload-banner-80-15" style="'.($options['size'] == '80-15' ? '' : 'display:none;').'">'.
+		'<div class="myFoxload-banner-80-15">'.
 			'<table border="0">'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="80-15-blue" '.($options['banner'] == '80-15-blue' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-80-15-blue.png" width="80" /></td></tr>'.
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="80-15-green" '.($options['banner'] == '80-15-green' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-80-15-green.png" width="80" /></td></tr>'.
@@ -182,10 +195,10 @@ function myFoxload_configuration($standalone = FALSE) {
 				'<tr><td valign="middle"><input type="radio" name="myFoxload-Banner" value="80-15-square-orange" '.($options['banner'] == '80-15-square-orange' ? 'checked="checked"' : '').' /></td><td valign="middle"><img src="http://www.foxload.com/images/wp/firefox-80-15-square-orange.png" width="80" /></td></tr>'.
 			'</table>'.
 		'</div>'.
-		'</td></tr>'.
-		'</table>'.
+		'</div>'.
+		'<script type="text/javascript">showFoxloadBanner("'.$options['size'].'");</script>'.
 		'<input type="hidden" id="myFoxload-Submit" name="myFoxload-Submit" value="1" />'.
-	 '</p>';
+		'</p>';
 	 
 	if ($standalone) {
 		echo '<p class="submit">';
@@ -207,11 +220,11 @@ function myFoxload_configuration($standalone = FALSE) {
 
 function myFoxload_init() {
   register_sidebar_widget(__('Foxload'), 'widget_myFoxload');
-  register_widget_control('Foxload', 'myFoxload_control', 300, 200);    
+  register_widget_control('Foxload', 'myFoxload_control');    
 }
 
 function myFoxload_admin_add_page() {
-  add_options_page('Foxload', 'Foxload', 'manage_options', 'plugin', 'myFoxload_settings');
+  add_options_page('Foxload', 'Foxload', 'manage_options', 'foxload-firefox-download.php', 'myFoxload_settings');
 }
 
 add_action("plugins_loaded", "myFoxload_init");
