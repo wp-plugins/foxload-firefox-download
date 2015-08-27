@@ -3,8 +3,8 @@ Contributors: Foxload
 Donate link: http://www.foxload.com
 Tags: firefox, download, widget, button, browser, sidebar, mozilla
 Requires at least: 2.7
-Tested up to: 3.6
-Stable tag: 0.2.11
+Tested up to: 4.3
+Stable tag: 0.2.12
 
 Offers your blog visitors a firefox download button in different formats and colors on the sidebar.
 
@@ -34,6 +34,7 @@ Because firefox is one of the best browsers in the world.
 
 == Change Log ==
 
+* v0.2.12 27.08.2015 compatibility check
 * v0.2.11 09.08.2013 wp_footer and compatibility check
 * v0.2.10 29.07.2011 compatibility check
 * v0.2.9 12.05.2011 compatibility check
